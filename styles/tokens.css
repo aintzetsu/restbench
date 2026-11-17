@@ -1,0 +1,52 @@
+/* ==========================================================================
+   RestBench — API Playground & DevTool Tokens
+   ========================================================================== */
+
+:root {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --bg: #0a0c10;
+  --bg-elevated: #12151c;
+  --bg-subtle: #191d27;
+  --ink: #ecf0f8;
+  --ink-secondary: #b4bdd0;
+  --ink-muted: #768096;
+  --border: rgba(236, 240, 248, 0.11);
+  --border-strong: rgba(236, 240, 248, 0.22);
+
+  --accent: #06b6d4;
+  --accent-hover: #22d3ee;
+  --accent-soft: rgba(6, 182, 212, 0.15);
+  --accent-ink: #042f2e;
+  --emerald: #22c55e;
+  --amber: #f59e0b;
+  --rose: #f43f5e;
+  --violet: #a855f7;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --fast: 150ms var(--ease);
+}
+
+[data-theme="light"] {
+  --bg: #f5f7fb;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #ebeef5;
+  --ink: #111521;
+  --ink-secondary: #3f485c;
+  --ink-muted: #697489;
+  --border: rgba(17, 21, 33, 0.11);
+  --border-strong: rgba(17, 21, 33, 0.22);
+
+  --accent: #0284c7;
+  --accent-hover: #0369a1;
+  --accent-soft: rgba(2, 132, 199, 0.12);
+  --accent-ink: #ffffff;
+  --emerald: #16a34a;
+  --amber: #d97706;
+  --rose: #e11d48;
+  --violet: #7e22ce;
+}
