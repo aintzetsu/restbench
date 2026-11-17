@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RestBench — Browser REST API Playground &amp; Inspector</title>
+  <meta name="description" content="RestBench is a fast in-browser API client with stateful mock CRUD endpoints, live fetch() execution, JSON syntax highlighting, headers editor, and cURL/fetch/Python code generators." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0c10'/%3E%3Cpath d='M10 10L6 16L10 22M22 10L26 16L22 22M18 9L14 23' stroke='%2306b6d4' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <script defer src="js/mockApi.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span>RestBench</span>
+      <span class="brand__badge">HTTP CLIENT</span>
+    </div>
+
+    <div style="display: flex; gap: 0.55rem; align-items: center;">
+      <button id="theme-toggle" type="button" class="btn btn--ghost btn--sm">Light Mode</button>
+    </div>
+  </header>
+
+  <div class="workbench">
+    <aside class="sidebar" aria-label="Collections and history">
+      <div>
+        <h2>Collections</h2>
+        <div id="preset-list" class="preset-list"></div>
+      </div>
+
+      <div>
+        <h2>Recent History</h2>
+        <div id="history-list" class="preset-list"></div>
+      </div>
+    </aside>
+
+    <main class="main-pane">
+      <div class="url-bar">
+        <label for="method-select" class="sr-only">HTTP Method</label>
+        <select id="method-select" class="method-select">
+          <option value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="PATCH">PATCH</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+
+        <label for="url-input" class="sr-only">Request URL</label>
+        <input id="url-input" type="text" class="url-input" placeholder="mock://api.restbench.dev/v1/users or https://..." />
+
+        <button id="send-btn" type="button" class="btn btn--primary">Send</button>
+      </div>
+
+      <div class="split-panes">
+        <!-- Request Editor -->
+        <section class="panel" aria-label="Request editor">
+          <div class="panel__bar">
+            <div class="tabs" role="tablist">
+              <button type="button" class="tab is-active" data-req-tab="body">Body (JSON)</button>
+              <button type="button" class="tab" data-req-tab="headers">Headers</button>
+            </div>
+            <button id="prettify-btn" type="button" class="btn btn--ghost btn--sm">Prettify JSON</button>
+          </div>
+
+          <div class="panel__body">
+            <div id="req-body-pane" style="display: flex; flex-direction: column; gap: 0.5rem; flex: 1;">
+              <label for="body-editor" class="sr-only">JSON request body</label>
+              <textarea id="body-editor" class="code-editor" spellcheck="false" placeholder='{"name": "Ada Lovelace"}'></textarea>
+              <span id="json-status" class="mono" style="font-size: 0.76rem; color: var(--ink-muted);">Empty body</span>
+            </div>
+
+            <div id="req-headers-pane" hidden style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <div id="kv-table" class="kv-table"></div>
+              <button id="add-header-btn" type="button" class="btn btn--ghost btn--sm" style="align-self: flex-start;">+ Add Header</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Response & Snippets -->
+        <section class="panel" aria-label="Response inspector">
+          <div class="panel__bar">
+            <div class="tabs" role="tablist">
+              <button type="button" class="tab is-active" data-res-tab="pretty">Response</button>
+              <button type="button" class="tab" data-res-tab="headers">Headers</button>
+              <button type="button" class="tab" data-res-tab="snippets">Code</button>
+            </div>
+
+            <div class="status-meta">
+              <span id="res-status" class="status-ok">200 OK</span>
+              <span id="res-time">0 ms</span>
+              <span id="res-size">0 B</span>
+              <button id="copy-res-btn" type="button" class="btn btn--ghost btn--sm">Copy</button>
+            </div>
+          </div>
+
+          <div class="panel__body">
+            <div id="snippet-bar" class="tabs" hidden>
+              <button type="button" class="tab is-active" data-snippet="curl">cURL</button>
+              <button type="button" class="tab" data-snippet="fetch">fetch()</button>
+              <button type="button" class="tab" data-snippet="python">Python</button>
+            </div>
+            <pre id="res-output" class="code-view"></pre>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
